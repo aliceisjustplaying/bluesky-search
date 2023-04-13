@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /// <reference types="./custom-typings.d.ts" />
 import bsky from '@atproto/api';
 const { BskyAgent } = bsky;
