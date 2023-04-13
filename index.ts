@@ -21,6 +21,7 @@ await agent.login({
   password: process.env.BSKY_PASSWORD!,
 });
 
+// source: https://github.com/bluesky-social/atproto/blob/efb1cac2bfc8ccb77c0f4910ad9f3de7370fbebb/packages/bsky/tests/_util.ts#L314
 const paginateAll = async <T extends { cursor?: string }>(
   fn: (cursor?: string) => Promise<T>,
   limit = Infinity,
@@ -35,6 +36,7 @@ const paginateAll = async <T extends { cursor?: string }>(
   return results;
 };
 
+// source: https://github.com/bluesky-social/atproto/blob/efb1cac2bfc8ccb77c0f4910ad9f3de7370fbebb/packages/bsky/tests/views/author-feed.test.ts#L94
 const paginator = async (cursor?: string) => {
   const res = await agent.getAuthorFeed({
     actor: agent.session!.did,
