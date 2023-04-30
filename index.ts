@@ -7,10 +7,10 @@ import { search } from 'fast-fuzzy';
 // import Fuse from 'fuse.js';
 dotenv.config();
 
-if (typeof process.argv[2] === 'undefined') {
-  console.log('Please provide a search term');
-  process.exit(1);
-}
+// if (typeof process.argv[2] === 'undefined') {
+//   console.log('Please provide a search term');
+//   process.exit(1);
+// }
 
 const agent = new BskyAgent({
   service: 'https://bsky.social',
@@ -43,9 +43,54 @@ const paginator = async (cursor?: string) => {
     cursor,
     limit: 100,
   });
+  process.stdout.write('.');
   return res.data;
 };
 
+// const followinator = async (cursor?: string) => {
+//   const res = await agent.getFollowers({
+//     actor: agent.session!.did,
+//     cursor,
+//     limit: 100,
+//   });
+//   return res.data;
+// };
+
+// const followersAll = await paginateAll(followinator);
+
+// const followers: object[] = [];
+
+// followersAll.forEach((res) => {
+//   if (typeof res.followers[0] !== 'undefined') {
+//     followers.push(
+//       ...res.followers.map((f) => ({
+//         handle: f.handle,
+//         uri: `https://staging.bsky.app/profile/${f.handle}`,
+//         indexedAt: new Date(f.indexedAt as string),
+//         did: f.did,
+//         displayName: f.displayName,
+//       })),
+//     );
+//   }
+// });
+
+// console.log(followers.length);
+
+// followers.sort((a: any, b: any) => {
+//   return a.indexedAt - b.indexedAt;
+// });
+
+// [...Array(200)].map((_, i) => {
+//   console.log((followers[i] as any).handle);
+//   console.log((followers[i] as any).indexedAt);
+//   console.log('---------');
+// });
+
+// process.exit(0);
+
+// agent.app.bsky.graph.getFollowers();
+
+process.stdout.write('loading: ');
 const paginatedAll = await paginateAll(paginator);
 
 const posts: object[] = [];
